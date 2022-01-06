@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet
+@WebServlet("/first_servlet")
 public class HelloBrowserServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(HelloBrowserServlet.class);
 
