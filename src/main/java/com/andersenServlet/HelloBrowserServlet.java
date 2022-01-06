@@ -1,7 +1,8 @@
+package com.andersenServlet;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,10 +11,10 @@ import java.io.IOException;
 
 @WebServlet("/first_servlet")
 public class HelloBrowserServlet extends HttpServlet {
-    private static Logger logger = LoggerFactory.getLogger(HelloBrowserServlet.class);
+    private static final Logger logger = LoggerFactory.getLogger(HelloBrowserServlet.class);
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.getWriter().printf("<html><body>");
         for (int i = 0; i < 10; i++) {
             resp.getWriter().printf("<h1>" + i + "</h1>");
@@ -27,7 +28,7 @@ public class HelloBrowserServlet extends HttpServlet {
     }
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         logger.debug("Init");
     }
 }
