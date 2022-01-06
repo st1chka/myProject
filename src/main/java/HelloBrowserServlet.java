@@ -1,12 +1,11 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class HelloBrowserServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(HelloBrowserServlet.class);
@@ -19,8 +18,6 @@ public class HelloBrowserServlet extends HttpServlet {
         }
         resp.getWriter().printf("</html></body>");
     }
-
-
 
     @Override
     public void destroy() {
