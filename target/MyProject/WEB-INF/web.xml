@@ -8,7 +8,7 @@
   
   <servlet>
     <servlet-name>HelloBrowserServlet</servlet-name>
-    <servlet-class>HelloBrowserServlet</servlet-class>
+    <servlet-class>com.andersenServlet.HelloBrowserServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
