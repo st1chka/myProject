@@ -1,10 +1,7 @@
 package com.st1ch.andersenWeb.models;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,7 +19,7 @@ public class Roles {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "roles")
     private List<Users> users = new ArrayList<>();
 
     public Roles() {

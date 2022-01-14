@@ -32,14 +32,5 @@ public class Users {
     )
     private List<Roles> roles = new ArrayList<>();
 
-    public void addRoles(Roles role) {
-        roles.add(role);
-        role.getUsers().add(this);
-    }
-
-    public void removeTag(Roles role) {
-        roles.remove(role);
-        role.getUsers().remove(this);
-    }
 
 }

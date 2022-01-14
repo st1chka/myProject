@@ -4,6 +4,7 @@ import com.st1ch.andersenWeb.dao.RoleDAO;
 import com.st1ch.andersenWeb.dao.UserDAO;
 import com.st1ch.andersenWeb.models.Roles;
 import com.st1ch.andersenWeb.models.Users;
+import com.st1ch.andersenWeb.service.UserService;
 import lombok.SneakyThrows;
 
 import javax.management.relation.Role;
@@ -14,13 +15,11 @@ public class MainServlet {
     @SneakyThrows
     public static void main(String[] args) {
 
-        UserDAO usersDao = new UserDAO();
-        System.out.println(usersDao.find(3L));
-        System.out.println(usersDao.findAll());
+        UserService userService = new UserService();
+        RoleDAO userDAO = new RoleDAO();
+        Roles roles = new Roles("Masha");
+        userDAO.save(roles);
 
 
-        RoleDAO roleDao = new RoleDAO();
-        System.out.println(roleDao.find(3L));
-        System.out.println(roleDao.findAll());
     }
 }
