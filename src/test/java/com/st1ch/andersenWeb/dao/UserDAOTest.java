@@ -85,42 +85,33 @@ class UserDAOTest {
         session.close();
     }
 
-    //        @Test
+    @Test
     void update() {
-        //Given
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Transaction tr = session.beginTransaction();
+
+
         Set<Roles> roles = new HashSet<>();
         Roles role_admin = new Roles();
         Roles role_manager = new Roles();
-        Roles role_user = new Roles();
 
         role_admin.setName("admin");
         roles.add(role_admin);
-
         role_manager.setName("manager");
         roles.add(role_manager);
+
         Users person = new Users();
-        person.setId(1);
-        person.setLogin("Jekson");
+        person.setLogin("Jack");
         person.setRoles(roles);
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-//        Transaction tr = session.beginTransaction();
 
-
+        session.save(person);
+        tr.commit();
+        Transaction tr2 = session.beginTransaction();
         //When
-        Serializable id = session.save(person);
         UserDAO userDAO = new UserDAO();
-        userDAO.update(1, "Max");
-//        tr.commit();
 
-
-        //Then
-
-        assertEquals("Max", session.load(Users.class, person.getId()).getLogin());
-        assertEquals(person.getRoles(), session.get(Users.class, person.getId()).getRoles());
-        assertNotNull(id);
-        assertNotNull(session.get(Users.class, id));
-        session.delete(person);
-        session.close();
+        userDAO.update(person.getId(), "ne Jack");
+        tr2.commit();
     }
 
     @Test
@@ -188,9 +179,9 @@ class UserDAOTest {
         testUsers2.add(person2);
         //Then
         assertFalse(testUsers.isEmpty());
-        assertEquals(testUsers2.toString(),testUsers.toString());
+        assertEquals(testUsers2.toString(), testUsers.toString());
 
-        session.delete(person);
+
         session.close();
     }
 }
