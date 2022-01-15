@@ -1,9 +1,9 @@
 package com.st1ch.andersenWeb.service;
 
 import com.st1ch.andersenWeb.dao.UserDAO;
-import com.st1ch.andersenWeb.models.Roles;
 import com.st1ch.andersenWeb.models.Users;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class UserService {
@@ -13,7 +13,7 @@ public class UserService {
     public UserService() {
     }
 
-    public Users findUser(int id) {
+    public Users findUser(Long id) {
         return usersDao.findById(id);
     }
 
@@ -21,20 +21,16 @@ public class UserService {
         usersDao.save(user);
     }
 
-    public void deleteUser(Users user) {
-        usersDao.delete(user);
+    public void deleteUser(Serializable id) {
+        usersDao.deleteUserById(id);
     }
 
-    public void updateUser(Users user) {
-        usersDao.update(user);
+    public void updateUser(Serializable id, String name) {
+        usersDao.update(id, name);
     }
 
     public List<Users> findAllUsers() {
         return usersDao.findAll();
-    }
-
-    public Roles findAutoById(int id) {
-        return usersDao.findAutoById(id);
     }
 
 }

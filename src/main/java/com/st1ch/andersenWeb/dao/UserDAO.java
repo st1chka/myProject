@@ -1,44 +1,70 @@
 package com.st1ch.andersenWeb.dao;
 
 import com.st1ch.andersenWeb.HibernateSessionFactoryUtil;
-import com.st1ch.andersenWeb.models.Roles;
 import com.st1ch.andersenWeb.models.Users;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class UserDAO {
-    public Users findById(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Users.class, id);
+    private final SessionFactory sessionFactory;
+
+    public UserDAO() {
+        sessionFactory = HibernateSessionFactoryUtil.getSessionFactory();
+    }
+
+    public Users findById(Serializable id) {
+        Session session = sessionFactory.openSession();
+        Users users = session.get(Users.class, id);
+        session.close();
+        return users;
     }
 
     public void save(Users user) {
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         Transaction tx1 = session.beginTransaction();
         session.save(user);
         tx1.commit();
         session.close();
     }
 
-    public void update(Users user) {
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction tx1 = session.beginTransaction();
-        session.update(user);
-        tx1.commit();
-        session.close();
+    public void update(Serializable id, String name) {
+        Session session = sessionFactory.openSession();
+        Users users = session.get(Users.class, id);
+        Transaction tr = null;
+        try {
+            tr = session.beginTransaction();
+            users.setLogin(name);
+            session.update(users);
+            tr.commit();
+        } catch (Exception e) {
+            if (tr != null) tr.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
     }
 
-    public void delete(Users user) {
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction tx1 = session.beginTransaction();
-        session.delete(user);
-        tx1.commit();
-        session.close();
-    }
 
-    public Roles findAutoById(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Roles.class, id);
+    public boolean deleteUserById(Serializable id)  {
+        Session session = sessionFactory.openSession();
+        Users users = session.get(Users.class, id);
+        Transaction tr = null;
+        try {
+            tr = session.beginTransaction();
+            session.delete(users);
+            tr.commit();
+        } catch (Exception e) {
+            if (tr != null) tr.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return users != null;
     }
 
     public List<Users> findAll() {

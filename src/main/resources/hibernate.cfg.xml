@@ -5,12 +5,13 @@
         <property name="hibernate.connection.url">
             jdbc:postgresql://localhost:5432/postgres
         </property>
-        <property name="hibernate.connection.username">postgres</property>
-        <property name="hibernate.connection.password">pikyli228</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">pikyli228</property>
+        <property name="hbm2ddl.auto">update</property>
+        <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
         <property name="show_sql">true</property>
         <mapping class="com.st1ch.andersenWeb.models.Roles"/>
         <mapping class="com.st1ch.andersenWeb.models.Users"/>
     </session-factory>
+
 </hibernate-configuration>
