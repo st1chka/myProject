@@ -31,13 +31,13 @@ public class UserDAO {
         session.close();
     }
 
-    public void update(Serializable id, String name) {
+    public void update(Serializable id, String setName) {
         Session session = sessionFactory.openSession();
         Users users = session.get(Users.class, id);
         Transaction tr = null;
         try {
             tr = session.beginTransaction();
-            users.setLogin(name);
+            users.setLogin(setName);
             session.update(users);
             tr.commit();
         } catch (Exception e) {

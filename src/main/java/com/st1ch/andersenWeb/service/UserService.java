@@ -25,8 +25,8 @@ public class UserService {
         usersDao.deleteUserById(id);
     }
 
-    public void updateUser(Serializable id, String name) {
-        usersDao.update(id, name);
+    public void updateUser(Serializable id, String setName) {
+        usersDao.update(id, setName);
     }
 
     public List<Users> findAllUsers() {
